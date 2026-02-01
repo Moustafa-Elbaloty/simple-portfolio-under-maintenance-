@@ -1,13 +1,13 @@
-# Portfolio App - Next.js
+# Portfolio App 
 
-A modern, full-stack portfolio website built with Next.js, featuring both a public portfolio and an admin dashboard.
+A modern, full-stack portfolio website, featuring both a public portfolio and an admin dashboard.
 
 ## 🚀 Features
 
 ### Public Portfolio
 - **Responsive Design**: Beautiful, mobile-first portfolio design
 - **Multi-language Support**: Arabic and English language support
-- **Dark/Light Theme**: Theme switching with Next.js themes
+- **Dark/Light Theme**: Theme switching 
 - **Interactive Sections**: 
   - Hero section with animated text
   - About section with flip cards
@@ -37,38 +37,29 @@ A modern, full-stack portfolio website built with Next.js, featuring both a publ
 - **Responsive Design**: Works perfectly on any website
 - **Easy Integration**: Simple iframe embed with URL parameters
 
-## 🛠️ Tech Stack
-
-- **Frontend**: Next.js 15, React, TypeScript
-- **Styling**: Tailwind CSS, Radix UI Components
-- **Backend**: Next.js API Routes
-- **Database**: PostgreSQL with Prisma ORM
-- **Authentication**: NextAuth.js
-- **Icons**: Lucide React
-- **Deployment**: Vercel-ready
 
 ## 📁 Project Structure
 
 ```
 portfolio-app/
 ├── src/
-│   ├── app/                          # Next.js App Router
-│   │   ├── (public)/                 # Public portfolio pages
-│   │   ├── (dashboard)/              # Admin dashboard (protected)
-│   │   ├── api/                      # API endpoints
+│   ├── app/                         
+│   │   ├── (public)/               
+│   │   ├── (dashboard)/             
+│   │   ├── api/                   
 │   │   └── layout.tsx
-│   ├── components/                   # Reusable UI components
-│   │   ├── ui/                       # Generic UI components
-│   │   ├── portfolio/                # Portfolio-specific components
-│   │   └── dashboard/                # Dashboard-specific components
-│   ├── lib/                          # Utility functions
-│   ├── services/                     # API services
-│   │   ├── backend/                  # Server-side services
-│   │   └── frontend/                 # Client-side API calls
-│   ├── hooks/                        # React hooks
-│   └── styles/                       # CSS styles
-├── prisma/                           # Database schema and migrations
-├── public/                           # Static assets
+│   ├── components/             
+│   │   ├── ui/                     
+│   │   ├── portfolio/               
+│   │   └── dashboard/             
+│   ├── lib/                       
+│   ├── services/                   
+│   │   ├── backend/                  
+│   │   └── frontend/                
+│   ├── hooks/                       
+│   └── styles/                      
+├── prisma/                         
+├── public/                          
 └── package.json
 ```
 
@@ -77,53 +68,9 @@ portfolio-app/
 ### Prerequisites
 - Node.js 18+ 
 - PostgreSQL database
-- npm or yarn
+- npm 
 
-### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd portfolio-app
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Setup environment variables**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your database and other configuration
-   ```
-
-4. **Setup database**
-   ```bash
-   # Generate Prisma client
-   npm run db:generate
-   
-   # Create database tables
-   npm run db:push
-   
-   # (Optional) Seed database with sample data
-   npm run db:seed
-   ```
-
-5. **Start development server**
-   ```bash
-   npm run dev
-   ```
-
-   Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
-
-### Database Setup
-
-The project uses PostgreSQL with Prisma. Make sure to:
-
-1. Create a PostgreSQL database
-2. Update the `DATABASE_URL` in your `.env` file
-3. Run database migrations: `npm run db:push`
 
 ## 📊 Database Schema
 
@@ -151,78 +98,7 @@ The project includes models for:
 - `GET /api/skills` - Get all skills
 - `POST /api/skills` - Create new skill
 
-## 🎨 Customization
 
-### Styling
-- Modify `src/styles/globals.css` for global styles
-- Update Tailwind configuration in `tailwind.config.js`
-- Customize components in `src/components/`
-
-### Content
-- Update portfolio content in component files
-- Modify database schema in `prisma/schema.prisma`
-- Add new API endpoints in `src/app/api/`
-
-### Logo Management
-- Upload custom logos through the dashboard at `/dashboard`
-- Logos are automatically compressed for optimal performance
-- Supports PNG, JPG, SVG, GIF, and WebP formats (max 5MB)
-- Logos appear in the navigation bar and footer
-- Falls back to `/Icon.svg` if no custom logo is uploaded
-- Use transparent background PNG with wide aspect ratio for best results
-
-## 🔧 Key Features Explained
-
-### Image Compression
-- **Client-side compression**: Images are compressed in the browser for Vercel compatibility
-- **Multiple formats**: Supports all common image formats
-- **Automatic optimization**: Logos are resized and optimized automatically
-- **Quality control**: Maintains good quality while reducing file size
-
-### Logo System
-- **Dynamic loading**: Logos are loaded dynamically using React hooks
-- **Fallback support**: Graceful fallback to default logo if custom logo fails
-- **Real-time updates**: Logo changes appear immediately across the site
-- **Dashboard management**: Easy upload and editing through admin interface
-
-## 🎴 Embeddable Portfolio Card
-
-The portfolio includes an embeddable widget that can be integrated into any website.
-
-### Usage Examples
-
-#### Basic Embed (Arabic - Default):
-```html
-<iframe 
-  src="https://yourportfolio.com/embed?lang=AR&color=%23e11d48" 
-  width="100%" 
-  height="400" 
-  frameborder="0"
-  style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-</iframe>
-```
-
-#### English with Custom Color:
-```html
-<iframe 
-  src="https://yourportfolio.com/embed?lang=EN&color=%233b82f6" 
-  width="100%" 
-  height="400" 
-  frameborder="0">
-</iframe>
-```
-
-### Available Parameters
-
-| Parameter | Description | Default | Example |
-|-----------|-------------|---------|---------|
-| `lang` | Language (AR/EN) | `AR` | `lang=EN` |
-| `color` | Primary color (hex, URL encoded) | `#3b82f6` | `color=%23e11d48` |
-
-### Testing & Demo
-
-- **Live Demo**: Visit `/embed-demo` to test customizations
-- **Examples**: View `/embed-examples.html` for implementation examples
 
 ### Features
 
@@ -254,12 +130,6 @@ The app can be deployed to any platform that supports Next.js.
 ## 📝 License
 
 This project is licensed under the MIT License.
-
-## 🔗 Links
-
-- **Portfolio**: [Your Live Portfolio URL]
-- **Dashboard**: [Your Live Portfolio URL]/dashboard
-- **API Docs**: [Your Live Portfolio URL]/api
 
 ---
 
