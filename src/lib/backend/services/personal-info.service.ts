@@ -1,0 +1,86 @@
+import { BackendBaseService } from '@/lib/backend/bacendBase.service';
+import { ApiError } from '@/lib/backend/exceptions/api-error';
+import { IQueryOptions } from '@/interfaces/query.interface';
+import { CreatePersonalInfoDto, UpdatePersonalInfoDto, PersonalInfo } from '@/lib/backend/schemas/portfolio.schema';
+
+export class BackendPersonalInfoService extends BackendBaseService<PersonalInfo> {
+  constructor() {
+    super('personalInfo');
+  }
+
+  async create(data: CreatePersonalInfoDto): Promise<any> {
+    // Check if personal info for this language already exists
+    const existing = await this.model.findUnique({
+      where: { lang: data.lang }
+    });
+
+    if (existing) {
+      throw ApiError.conflict(`Personal info for language ${data.lang} already exists`, {});
+    }
+
+    return await this.model.create({
+      data,
+      include: {
+        image: true,
+      }
+    });
+  }
+
+  async findByLanguage(lang: string, options: IQueryOptions = {}): Promise<any> {
+    const processedOptions = this.processQueryOptions(options, true);
+
+    return await this.model.findFirst({
+      where: { lang },
+      include: {
+        image: {
+          select: {
+            url: true
+          }
+        },
+      
+        ...processedOptions.include
+      }
+    });
+  }
+
+  async updateById(id: string, data: UpdatePersonalInfoDto): Promise<any> {
+    const existing = await this.model.findUnique({ where: { id } });
+    if (!existing) {
+      throw ApiError.notFound('Personal info not found', {});
+    }
+
+
+      // Transform `imageId` into relation-friendly syntax
+    const { imageId, ...rest } = data as any;
+    const updateData: any = { ...rest };
+
+    if (imageId !== undefined) {
+      updateData.image = imageId
+        ? { connect: { id: imageId } }
+        : { disconnect: true };
+    }
+
+
+    return await this.model.update({
+      where: { id },
+      data: updateData,
+      include: {
+        image: true,
+      }
+    });
+  }
+
+  async deleteById(id: string): Promise<any> {
+    const existing = await this.model.findUnique({ where: { id } });
+    if (!existing) {
+      throw ApiError.notFound('Personal info not found', {});
+    }
+
+    return await this.model.delete({
+      where: { id },
+      include: {
+        image: true,
+      }
+    });
+  }
+}
